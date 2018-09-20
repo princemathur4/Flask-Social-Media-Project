@@ -1,4 +1,22 @@
 from flask import Flask
+from config import Config
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_login import LoginManager
 
 app = Flask(__name__)   #instance
-from app import routes
+app.config.from_object(Config)
+
+db= SQLAlchemy(app)
+migrate= Migrate(app,db)
+
+# from app import routes2_3
+
+login = LoginManager(app)
+login.login_view = 'login'    # name you would use in "url_for" call to get the url
+
+from app import routes5_1,models 
+
+if(__name__=='__main__'):
+    app.run()
+    
