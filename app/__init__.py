@@ -19,4 +19,3 @@ from app import routes5_1,models
 
 if(__name__=='__main__'):
     app.run()
-    
