@@ -19,13 +19,14 @@ def before_request():
 @app.route('/edit_profile',methods=['GET','POST'])
 @login_required
 def edit_profile():
-    form=EditProfileForm()
+    form=EditProfileForm(current_user.username)
     if form.validate_on_submit():
-        u=User.query.filter_by(username=form.username.data).one_or_none()
-        if(u is not None):
-            current_user.username= form.username.data
-        else:
-            flash("This username is taken.\n Try another one.")
+        # u=User.query.filter_by(username=form.username.data).first()
+        # if(u is None):
+        current_user.username= form.username.data
+        # else:
+        #     flash("This username is taken.\n Try another one.")
+
         current_user.about_me= form.about_me.data
         db.session.commit()
         flash('Your changes have been saved.')
