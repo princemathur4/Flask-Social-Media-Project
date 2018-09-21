@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import ValidationError,DataRequired,Email,EqualTo
+from wtforms import StringField, PasswordField, BooleanField, SubmitField,TextAreaField
+from wtforms.validators import ValidationError,DataRequired,Email,EqualTo,Length
 from app.models import User
 
 class LoginForm(FlaskForm):
@@ -9,8 +9,9 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign in')
 
+
 class RegistrationForm(FlaskForm):
-    name = StringField('Name',validators=[DataRequired()])
+    # full_name = StringField('Fullname',validators=[DataRequired()])
     username = StringField('Username',validators=[DataRequired()])
     email = StringField('E-mail',validators=[DataRequired(),Email()])
     password = PasswordField('Password',validators=[DataRequired()])
@@ -21,8 +22,14 @@ class RegistrationForm(FlaskForm):
         user=User.query.filter_by(username=username.data).first()
         if(user is not None):
             raise ValidationError('This username is taken,\n Please use a different username')
+
     def validate_email(self,email):
         email=User.query.filter_by(email=email.data).first()
         if(email is not None):
             raise ValidationError('This email is already registered!')
+    
+class EditProfileForm(FlaskForm):
+    username = StringField('Username',validators=[DataRequired()])
+    about_me = TextAreaField('About me',validators=[Length(min=0,max=140)])
+    submit=SubmitField('Submit')
     

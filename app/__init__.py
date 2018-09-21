@@ -10,13 +10,11 @@ app.config.from_object(Config)
 db= SQLAlchemy(app)
 migrate= Migrate(app,db)
 
-# from app import routes2_3
-
 login = LoginManager(app)
 login.login_view = 'login'    # name you would use in "url_for" call to get the url
 
-from app import routes5_1,models 
+# from app import routes5_1, models 
+from app import routes6_1, models
 
 if(__name__=='__main__'):
     app.run()
-    

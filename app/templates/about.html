@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <title>About us</title>
+    {%if not current_user.is_anonymous %}
+        <h1>Hi, {{current_user.username}}</h1><br>
+    {% endif %}
+            <h1>About us</h1>
+    <h2>Created by: {{abt.Creator }}</h2>
+
+    <div><p> Designed for <b>{{ abt.Purpose }}</b></p></div>
+{% endblock %}

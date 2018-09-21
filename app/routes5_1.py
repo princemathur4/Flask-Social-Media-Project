@@ -5,10 +5,10 @@ from app.models import User
 from flask_login import login_required,login_user,logout_user,current_user
 from flask import request
 from werkzeug.urls import url_parse
+from time import sleep
 
 @app.route('/')
 @app.route('/index')
-@login_required
 def index():
     posts=[
         {
@@ -21,6 +21,17 @@ def index():
         }
     ]
     return render_template('index5_1.html',title="Home Page",posts=posts)
+
+
+@app.route('/about')
+@login_required
+def about():
+    abt={
+            'Creator':"Miguel Grinberg",
+            'Purpose':'Designed for Students'
+        }
+    return render_template('about.html',abt=abt)
+
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -53,11 +64,19 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
+    
+    if form.is_submitted():
+        print("Submitted Successfully!")
+    if form.validate():
+        print("Validated")
+    print(form.errors)
+
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Awesome, you\'re all set up!')
+        sleep(3)
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
