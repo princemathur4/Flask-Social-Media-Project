@@ -8,6 +8,35 @@ from werkzeug.urls import url_parse
 from time import sleep
 from datetime import datetime
 
+@app.route('/follow/<username>')
+@login_required
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash(f'User {username } not found.')
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('You can\'t follow yourself idiot!')
+        return redirect(url_for('users',username=username))
+    current_user.follow(user)
+    db.session.commit()
+    flash(f'You are now following {username}!')
+    return redirect(url_for('users',username=username))
+
+@app.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash(f'User {username } not found.')
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('Stop polluting my site with shit requests!')
+        return redirect(url_for('users',username=username))
+    current_user.unfollow(user)
+    db.session.commit()
+    flash(f'You are no longer following {username}.')
+    return redirect(url_for('users',username=username))
 
 @app.before_request
 def before_request():
@@ -54,7 +83,8 @@ def index():
 @app.route('/users/<username>')
 @login_required
 def users(username):
-    user = User.query.filter_by(username=username).first_or_404()
+    user = User.query.filter_by(username=username).first()
+    print("####################### user = ",user)
     posts=[
         {
             'author':user,
