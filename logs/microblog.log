@@ -1,4 +1,12 @@
-2018-09-22 17:38:02,457 ERROR: Exception on /users/abcd [GET] [in C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py:1560]
+2018-09-23 13:23:51,294 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 13:34:19,157 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 13:44:35,057 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 14:58:58,004 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 15:00:07,648 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 15:01:49,032 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 15:11:14,932 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 15:13:36,006 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 15:13:38,458 ERROR: Exception on /users/laccha_kumar [GET] [in C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py:1560]
 Traceback (most recent call last):
   File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,41 +22,97 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "C:\ProgramData\Anaconda3\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "C:\Users\Prince\Desktop\microblog2\app\routes6_1.py", line 68, in users
-    return render_template('users.html',user=user,posts=posts)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\templating.py", line 134, in render_template
-    context, ctx.app)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\templating.py", line 116, in _render
-    rv = template.render(context)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\jinja2\environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+  File "C:\Users\Prince\Desktop\microblog2\app\routes6_1.py", line 88, in users
+    posts = Post.query.filter_by(author=username).order_by(Post.timestamp.desc()).all()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\query.py", line 1562, in filter_by
+    for key, value in kwargs.items()]
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\query.py", line 1562, in <listcomp>
+    for key, value in kwargs.items()]
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\sql\operators.py", line 304, in __eq__
+    return self.operate(eq, other)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\attributes.py", line 175, in operate
+    return op(self.comparator, *other, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\relationships.py", line 1043, in __eq__
+    other, adapt_source=self.adapter))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\relationships.py", line 1370, in _optimized_compare
+    state = attributes.instance_state(state)
+AttributeError: 'str' object has no attribute '_sa_instance_state'
+2018-09-23 15:31:23,651 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 15:31:42,134 ERROR: Exception on / [GET] [in C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py:1560]
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1517, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\_compat.py", line 33, in reraise
+    raise value
+  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1610, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1831, in preprocess_request
+    rv = func()
+  File "C:\Users\Prince\Desktop\microblog2\app\routes6_1.py", line 46, in before_request
+    db.session.commit()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\scoping.py", line 157, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\session.py", line 906, in commit
+    self.transaction.commit()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\session.py", line 461, in commit
+    self._prepare_impl()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\session.py", line 441, in _prepare_impl
+    self.session.flush()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\session.py", line 2171, in flush
+    self._flush(objects)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\session.py", line 2291, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\util\langhelpers.py", line 66, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\util\compat.py", line 187, in reraise
+    raise value
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\session.py", line 2255, in _flush
+    flush_context.execute()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 389, in execute
+    rec.execute(self)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 548, in execute
+    uow
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\persistence.py", line 177, in save_obj
+    mapper, table, update)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\orm\persistence.py", line 737, in _emit_update_statements
+    execute(statement, multiparams)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\engine\base.py", line 945, in execute
+    return meth(self, multiparams, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\sql\elements.py", line 263, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\engine\base.py", line 1053, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\engine\base.py", line 1189, in _execute_context
+    context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\engine\base.py", line 1402, in _handle_dbapi_exception
+    exc_info
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\util\compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\util\compat.py", line 186, in reraise
     raise value.with_traceback(tb)
-  File "C:\Users\Prince\Desktop\microblog2\app\templates\users.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "C:\Users\Prince\Desktop\microblog2\app\templates\base.html", line 33, in top-level template code
-    {% block content %}{% endblock %}
-  File "C:\Users\Prince\Desktop\microblog2\app\templates\users.html", line 20, in block "content"
-    <p><a href="{{ url_for('follow', username=user.username) }}">Follow</a></p>
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\helpers.py", line 333, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1805, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\_compat.py", line 33, in reraise
-    raise value
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\helpers.py", line 323, in url_for
-    force_external=external)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\werkzeug\routing.py", line 1768, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'follow' with values ['username']. Did you mean 'login' instead?
-2018-09-22 17:44:28,270 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
-2018-09-22 17:44:34,059 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
-2018-09-22 18:10:33,171 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
-2018-09-22 18:15:12,995 ERROR: Exception on /users/prince [GET] [in C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py:1560]
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked [SQL: 'UPDATE user SET last_seen=? WHERE user.id = ?'] [parameters: ('2018-09-23 10:01:37.068066', 4)]
+2018-09-23 15:35:33,521 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 15:38:28,057 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 16:01:46,503 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 17:15:48,960 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 17:15:54,688 ERROR: Exception on /index [GET] [in C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py:1560]
 Traceback (most recent call last):
   File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -64,70 +128,11 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "C:\ProgramData\Anaconda3\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "C:\Users\Prince\Desktop\microblog2\app\routes6_1.py", line 68, in users
-    return render_template('users.html',user=user,posts=posts)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\templating.py", line 134, in render_template
-    context, ctx.app)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\templating.py", line 116, in _render
-    rv = template.render(context)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\jinja2\environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\jinja2\_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "C:\Users\Prince\Desktop\microblog2\app\templates\users.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "C:\Users\Prince\Desktop\microblog2\app\templates\base.html", line 33, in top-level template code
-    {% block content %}{% endblock %}
-  File "C:\Users\Prince\Desktop\microblog2\app\templates\users.html", line 20, in block "content"
-    <p><a href="{{ url_for('follow', username=user.username) }}">Follow</a></p>
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\helpers.py", line 333, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1805, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\_compat.py", line 33, in reraise
-    raise value
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\helpers.py", line 323, in url_for
-    force_external=external)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\werkzeug\routing.py", line 1768, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'follow' with values ['username']. Did you mean 'login' instead?
-2018-09-22 18:18:23,465 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
-2018-09-22 18:21:10,006 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
-2018-09-22 18:26:31,549 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
-2018-09-22 18:38:43,981 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
-2018-09-22 20:12:50,127 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
-2018-09-22 20:13:43,689 ERROR: Exception on /follow/aditya_mathur [GET] [in C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py:1560]
-Traceback (most recent call last):
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1982, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1614, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1517, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\_compat.py", line 33, in reraise
-    raise value
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1598, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "C:\Users\Prince\Desktop\microblog2\app\routes6_1.py", line 24, in follow
-    return redirect(url_for('user',username=username))
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\helpers.py", line 333, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\app.py", line 1805, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\_compat.py", line 33, in reraise
-    raise value
-  File "C:\ProgramData\Anaconda3\lib\site-packages\flask\helpers.py", line 323, in url_for
-    force_external=external)
-  File "C:\ProgramData\Anaconda3\lib\site-packages\werkzeug\routing.py", line 1768, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'user' with values ['username']. Did you mean 'users' instead?
-2018-09-22 20:25:12,736 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
-2018-09-22 20:29:55,587 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+  File "C:\Users\Prince\Desktop\microblog2\app\routes6_1.py", line 81, in index
+    page,app.config['POST_PER_PAGE'],False)
+KeyError: 'POST_PER_PAGE'
+2018-09-23 17:17:05,011 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 17:52:10,918 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 18:11:55,522 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 18:13:22,217 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
+2018-09-23 18:15:33,643 INFO: Microblog startup [in C:\Users\Prince\Desktop\microblog2\app\__init__.py:50]
